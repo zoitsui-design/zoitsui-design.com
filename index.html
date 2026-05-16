@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoi Tsui Design</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <div class="bg"></div>
+
+    <div class="main">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <div class="title">Zoi Tsui Design</div>
+            <div class="pagination"><a href="#" class="work">Work</a></div>
+            <a href="https://instagram.com/zoitsui_design" target="_blank" class="instagram">Instagram</a>
+        </header>
+        
+        <div class="middle"></div>
+
+        <!-- 底部 -->
+        <div class="footer">
+            <div class="mail">
+                <span id="copymail">zoitsui.design@gmail.com</span>
+            </div>
+            <div class="time">
+                <span id="hk-time"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 實時香港時間 -->
+    <script>
+        function updateHongKongTime() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            const hour = String(now.getHours()).padStart(2, '0');
+            const minute = String(now.getMinutes()).padStart(2, '0');
+
+            const dateStr = year + month + day; // 16052026
+            const timeStr = hour + ':' + minute; // 15:07
+            document.getElementById('hk-time').innerText = dateStr + ' ' + timeStr;
+        }
+        updateHongKongTime();
+        setInterval(updateHongKongTime, 1000);
+    </script>
+
+    <!-- 點擊複製郵箱 -->
+    <script>
+        document.getElementById('copymail').addEventListener('click', () => {
+            const email = 'zoitsui.design@gmail.com';
+            navigator.clipboard.writeText(email).then(() => {
+                alert('已複製：' + email);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
