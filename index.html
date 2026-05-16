@@ -4,8 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zoitsui-design.com</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* 背景色还原你的设计稿 */
+            background-color: #EED8A0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: grid;
+            grid-template-areas:
+                "title . instagram"
+                ". center ."
+                "pagination text time";
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto 1fr auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* 通用按钮/模块样式 */
+        .box {
+            background-color: #D3D3D3;
+            border: 1px solid #000;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* 各个模块定位 */
+        .page-title {
+            grid-area: title;
+        }
+
+        .pagination-top {
+            grid-area: center;
+            justify-self: center;
+        }
+
+        .instagram-btn {
+            grid-area: instagram;
+            justify-self: end;
+        }
+
+        .center-image {
+            grid-area: center;
+            align-self: center;
+            justify-self: center;
+            width: 100px;
+            height: 100px;
+        }
+
+        .pagination-bottom {
+            grid-area: pagination;
+            align-self: end;
+        }
+
+        .text-block {
+            grid-area: text;
+            align-self: end;
+            justify-self: center;
+        }
+
+        .hongkong-time {
+            grid-area: time;
+            align-self: end;
+            justify-self: end;
+        }
+
+        /* 响应式适配：手机端自动调整布局 */
+        @media (max-width: 768px) {
+            body {
+                grid-template-areas:
+                    "title"
+                    "pagination-top"
+                    "center"
+                    "pagination-bottom"
+                    "text"
+                    "time"
+                    "instagram";
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr auto auto auto auto;
+                padding: 15px;
+            }
+
+            .instagram-btn,
+            .hongkong-time {
+                justify-self: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>✨ Welcome to zoitsui-design.com ✨</h1>
+    <div class="box page-title">網頁標題</div>
+    <div class="box pagination-top">分頁按鈕</div>
+    <div class="box instagram-btn">Instagram 按鈕</div>
+
+    <div class="box center-image">圖片置中全屏</div>
+
+    <div class="box pagination-bottom">分頁按鈕</div>
+    <div class="box text-block">文字段落</div>
+    <div class="box hongkong-time" id="hk-time">香港日期和時間</div>
+
+    <script>
+        // 自动显示香港时间
+        function updateHongKongTime() {
+            const options = {
+                timeZone: 'Asia/Hong_Kong',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            };
+            const timeStr = new Date().toLocaleString('zh-HK', options);
+            document.getElementById('hk-time').textContent = timeStr;
+        }
+
+        updateHongKongTime();
+        setInterval(updateHongKongTime, 1000);
+    </script>
 </body>
 </html>
